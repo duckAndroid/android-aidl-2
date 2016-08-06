@@ -10,6 +10,7 @@ interface RemoteBinder {
     void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
             double aDouble, String aString);
     int getResult();
+    void setResult(in int result);
     Duck getDuck();
     void setDuck(in Duck duck); // in is ok
 }

@@ -22,6 +22,7 @@ public class RemoteService extends Service {
     public class NewBinder extends RemoteBinder.Stub {
 
         private Duck duck;
+        private int result;
 
         @Override
         public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
@@ -30,19 +31,28 @@ public class RemoteService extends Service {
 
         @Override
         public int getResult() throws RemoteException {
-            return new Random().nextInt(500);
+            if (result == 0) {
+                return new Random().nextInt(500);
+            } else {
+                return this.result;
+            }
+        }
+
+        @Override
+        public void setResult(int result) throws RemoteException {
+            this.result = result;
         }
 
         @Override
         public Duck getDuck() throws RemoteException {
-            if(this.duck==null){
+            if (this.duck == null) {
 
-            Duck d = new Duck();
-            d.id=10086;
-            d.name = "DuckTang";
-            return d;
-            }else {
-                this.duck.name = this.duck.name+"&Jerry";
+                Duck d = new Duck();
+                d.id = 10086;
+                d.name = "DuckTang";
+                return d;
+            } else {
+                this.duck.name = this.duck.name + "&Jerry";
                 return this.duck;
             }
         }

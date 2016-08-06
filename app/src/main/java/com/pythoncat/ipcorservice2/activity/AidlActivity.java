@@ -34,6 +34,7 @@ public class AidlActivity extends AppCompatActivity {
         btnExecute.setOnClickListener(v -> {
             if (mRemoteBinder != null) {
                 try {
+                    mRemoteBinder.setResult(1024);
                     int result = mRemoteBinder.getResult();
                     tvShowResult.setText(getString(R.string.show_about_normal_service, result));
                     LogUtils.e("aidl result===" + result);
