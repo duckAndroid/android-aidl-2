@@ -1,8 +1,7 @@
 // RemoteBinder.aidl
 package com.pythoncat.aidl;
-
 // Declare any non-default types here with import statements
-
+import com.pythoncat.aidl.bean.Duck;
 interface RemoteBinder {
     /**
      * Demonstrates some basic types that you can use as parameters
@@ -11,4 +10,6 @@ interface RemoteBinder {
     void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
             double aDouble, String aString);
     int getResult();
+    Duck getDuck();
+    void setDuck(in Duck duck); // in is ok
 }

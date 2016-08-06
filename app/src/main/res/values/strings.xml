@@ -6,4 +6,5 @@
     <string name="result_of_normal_service">获取 normal Service计算结果</string>
     <string name="result_of_aidl_service">获取 aidl Service计算结果</string>
     <string name="show_about_normal_service">显示service计算的结果:&#160;%1$s</string>
+    <string name="show_about_parcelable_service">显示parcelable:&#160;%1$s</string>
 </resources>

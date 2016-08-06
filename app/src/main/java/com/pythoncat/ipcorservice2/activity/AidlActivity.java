@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.apkfuns.logutils.LogUtils;
 import com.pythoncat.aidl.RemoteBinder;
+import com.pythoncat.aidl.bean.Duck;
 import com.pythoncat.ipcorservice2.R;
 import com.pythoncat.service.RemoteService;
 
@@ -25,7 +26,9 @@ public class AidlActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aidl);
-        TextView tvShowResult = (TextView) findViewById(R.id.normal_show_tv);
+        TextView tvShowResult = (TextView) findViewById(R.id.aidl_show_tv);
+        TextView tvParcelable = (TextView) findViewById(R.id.aidl_show_parcelable_tv);
+        tvParcelable.setText(getString(R.string.show_about_parcelable_service, ""));
         tvShowResult.setText(getString(R.string.show_about_normal_service, ""));
         Button btnExecute = (Button) findViewById(R.id.aidl_ui_btn);
         btnExecute.setOnClickListener(v -> {
@@ -33,6 +36,14 @@ public class AidlActivity extends AppCompatActivity {
                 try {
                     int result = mRemoteBinder.getResult();
                     tvShowResult.setText(getString(R.string.show_about_normal_service, result));
+                    LogUtils.e("aidl result===" + result);
+                    Duck duck = new Duck();
+                    duck.name = "pythonCat";
+                    duck.id = 12306;
+                    mRemoteBinder.setDuck(duck);
+                    Duck d = mRemoteBinder.getDuck();
+                    tvParcelable.setText(getString(R.string.show_about_parcelable_service, d.toString()));
+                    LogUtils.e("aidl parcelable===" + d.toString());
                 } catch (RemoteException e) {
                     LogUtils.e("bind remote service fail...");
                     LogUtils.e(e);
